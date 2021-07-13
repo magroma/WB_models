@@ -1,4 +1,3 @@
-
 -- 2. verbundene Tabellen
 
 -- Mastertabelle: unverändert
