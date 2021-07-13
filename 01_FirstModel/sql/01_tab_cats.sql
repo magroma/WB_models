@@ -1,3 +1,4 @@
+-- Anlegen der Tabelle
 CREATE TABLE IF NOT EXISTS `mydb`.`cats` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NOT NULL,
@@ -5,5 +6,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`cats` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-#INSERT INTO `mydb`.`cats` (`id`, `name`, `age`) VALUES (NULL, NULL, NULL);
+-- Inserts
+INSERT INTO `mydb`.`cats` (`name`, `age`) VALUES ("Alonzo", 35);
+INSERT INTO `mydb`.`cats` (`name`, `age`) VALUES ("Grizabella", 29);
 
+SELECT * FROM cats;
