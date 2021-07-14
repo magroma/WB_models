@@ -46,6 +46,6 @@ ON cats.id = servants.cats_id
 ORDER BY yrs_served DESC
 ;
 
-
-
+-- Inner Join 4 / Dienstzeit
+-- "X - der Diener von Y - ist der Diener mit der längsten Dienstzeit" // MAX()
 
