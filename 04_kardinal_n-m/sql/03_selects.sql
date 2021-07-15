@@ -77,7 +77,7 @@ GROUP BY servant_name
 HAVING servant_name = "Dieter"
 #WHERE servant_name = "Dieter"
 ;
-*/
+
 
 -- Wer hat das Produkt X gekauft?  
 -- Irgendwas mit Lachs / Irgendwas mit Sauce LIKE
@@ -114,7 +114,7 @@ INNER JOIN products ON products.id = purchases.products_id
 GROUP BY product_name
 ORDER BY sum(product_price) DESC
 ;
-
+*/
 -- Lösung A: Berechnung in gleicher Tabelle
 SELECT
 	product_name AS Produkt,
@@ -127,4 +127,40 @@ INNER JOIN products ON products.id = purchases.products_id
 GROUP BY Produkt,Preis
 ORDER BY Umsatz DESC
 ;
+
+-- Lösung B: Berechnung mit tmp-Tabelle
+DROP TABLE IF EXISTS tmp;
+CREATE TABLE tmp
+(
+	product_name VARCHAR(45) NOT NULL,
+    product_price DECIMAL(4,2) NOT NULL,
+    anzahl INT NOT NULL
+);
+
+-- tmp: Struktur
+DESCRIBE tmp;
+
+-- Daten aus SELECT in Tabelle tmp
+INSERT INTO tmp
+SELECT
+	product_name AS Produkt,
+    product_price AS Preis,
+    count(product_name) AS Anzahl
+FROM purchases 
+INNER JOIN servants ON servants.id = purchases.servants_id
+INNER JOIN products ON products.id = purchases.products_id
+GROUP BY product_name,product_price
+;
+
+-- tmp: Inhalte
+SELECT * FROM tmp;
+
+-- Berechnung Umsätze
+SELECT
+	product_name AS Produkt,
+    product_price AS Preis,
+	Anzahl,
+    Anzahl * product_price AS Umsatz
+FROM tmp
+ORDER BY Umsatz DESC;
 
