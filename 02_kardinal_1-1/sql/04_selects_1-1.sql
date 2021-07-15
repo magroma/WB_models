@@ -1,5 +1,6 @@
 -- SELECTS
 
+USE mydb;
 
 -- Einzeltabellen
 SELECT * FROM mydb.cats;
