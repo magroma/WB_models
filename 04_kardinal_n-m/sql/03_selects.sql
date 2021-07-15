@@ -8,6 +8,7 @@ SELECT * FROM cats;
 SELECT * FROM servants;
 SELECT * FROM products;
 SELECT * FROM purchases;
+*/
 
 -- Inner Join 1 / Kombi (servants / products / purchases)
 SELECT
@@ -17,6 +18,7 @@ INNER JOIN servants ON servants.id = purchases.servants_id
 INNER JOIN products ON products.id = purchases.products_id
 ;
 
+/*
 -- Welche Artikel hat Dieter gekauft?
 SELECT
 	#servant_name AS "Diener"
@@ -66,7 +68,7 @@ WHERE servant_name ="Dieter";
 -- Kombi Aggregiert / Nicht Aggregiert
 SELECT
 	servant_name AS "Diener",
-    #count(servant_name) AS "Artikelanzahl"
+    count(servant_name) AS "Artikelanzahl",
     sum(product_price) AS "Gesamtkosten"
 FROM purchases
 INNER JOIN servants ON servants.id = purchases.servants_id
@@ -76,5 +78,15 @@ HAVING servant_name = "Dieter"
 #WHERE servant_name = "Dieter"
 ;
 
-
+-- Wer hat das Produkt X gekauft?  
+-- Irgendwas mit Lachs / Irgendwas mit Sauce LIKE
+-- Spalten --> Diener / Produkt
+-- Variante Jan
+SELECT
+	servant_name AS "DIENER",
+	product_name AS "Produkte mit Soße oder Lachs"
+FROM purchases
+INNER JOIN servants ON servants.id = purchases.servants_id
+INNER JOIN products ON products.id = purchases.products_id
+WHERE product_name LIKE "%Lachs%" OR product_name LIKE "%Sauce%";
 
