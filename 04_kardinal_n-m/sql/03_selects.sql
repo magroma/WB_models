@@ -33,7 +33,7 @@ INNER JOIN products ON products.id = purchases.products_id
 WHERE servant_name = "Peter"
 #WHERE servants_id = 2
 ;
-*/
+
 -- Wieviel Produkte hat Dieter gekauft?
 -- Wieviel Geld hat Dieter ausgegeben?
 
@@ -77,6 +77,7 @@ GROUP BY servant_name
 HAVING servant_name = "Dieter"
 #WHERE servant_name = "Dieter"
 ;
+*/
 
 -- Wer hat das Produkt X gekauft?  
 -- Irgendwas mit Lachs / Irgendwas mit Sauce LIKE
@@ -90,3 +91,13 @@ INNER JOIN servants ON servants.id = purchases.servants_id
 INNER JOIN products ON products.id = purchases.products_id
 WHERE product_name LIKE "%Lachs%" OR product_name LIKE "%Sauce%";
 
+-- Wie oft wurde das Produkt X gekauft?
+SELECT
+	product_name AS "Produkt", # organisch / nicht aggregiert
+    count(product_name) AS "Anzahl" #aggregiert
+FROM purchases
+INNER JOIN servants ON servants.id = purchases.servants_id
+INNER JOIN products ON products.id = purchases.products_id
+GROUP BY product_name
+ORDER BY count(product_name) DESC
+;
