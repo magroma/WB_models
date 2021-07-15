@@ -101,3 +101,30 @@ INNER JOIN products ON products.id = purchases.products_id
 GROUP BY product_name
 ORDER BY count(product_name) DESC
 ;
+
+-- Welche Umsätze hatte das Produkt X?
+-- Variante 1: Sven
+SELECT
+	product_name AS Produkt,
+	count(product_name) AS "Wie häufig wurde das Produkt gekauft",
+	sum(product_price) AS " Umsätze des Produktes"
+FROM purchases
+INNER JOIN servants ON servants.id = purchases.servants_id
+INNER JOIN products ON products.id = purchases.products_id
+GROUP BY product_name
+ORDER BY sum(product_price) DESC
+;
+
+-- Lösung A: Berechnung in gleicher Tabelle
+SELECT
+	product_name AS Produkt,
+    product_price AS Preis,
+    count(product_name) AS Anzahl,
+    count(product_name) * product_price AS Umsatz
+FROM purchases
+INNER JOIN servants ON servants.id = purchases.servants_id
+INNER JOIN products ON products.id = purchases.products_id
+GROUP BY Produkt,Preis
+ORDER BY Umsatz DESC
+;
+
