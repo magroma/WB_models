@@ -31,3 +31,24 @@ WHERE servant_name = "Peter"
 #WHERE servants_id = 2
 ;
 
+-- Wieviel Produkte hat Dieter gekauft?
+-- Wieviel Geld hat Dieter ausgegeben?
+
+-- Variante Christine
+SELECT
+concat	(
+		servant_name, 
+        " hat ", 
+		count(product_name), 
+		" Produkte gekauft und insgesamt EURO ", 
+		sum(product_price), " ausgegeben." 
+		) AS Produktzahl
+FROM purchases
+INNER JOIN servants ON servants.id = purchases.servants_id
+INNER JOIN products ON products.id = purchases.products_id
+WHERE servant_name = "Dieter"
+;
+
+
+
+
