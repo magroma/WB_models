@@ -1,6 +1,7 @@
 -- 03. SELECTS
 USE mydb;
 
+/*
 -- Einzeltabellen
 
 SELECT * FROM cats;
@@ -30,7 +31,7 @@ INNER JOIN products ON products.id = purchases.products_id
 WHERE servant_name = "Peter"
 #WHERE servants_id = 2
 ;
-
+*/
 -- Wieviel Produkte hat Dieter gekauft?
 -- Wieviel Geld hat Dieter ausgegeben?
 
@@ -42,13 +43,38 @@ concat	(
 		count(product_name), 
 		" Produkte gekauft und insgesamt EURO ", 
 		sum(product_price), " ausgegeben." 
-		) AS Produktzahl
+		) AS "Dieters Einkäufe"
 FROM purchases
 INNER JOIN servants ON servants.id = purchases.servants_id
 INNER JOIN products ON products.id = purchases.products_id
 WHERE servant_name = "Dieter"
 ;
 
+-- Variante Jan
+SELECT
+	CONCAT(
+			servant_name, 
+            " kauft ", 
+            COUNT(product_name), 
+            " Produkte."
+            ) AS "Kaufhandlung"
+FROM purchases
+INNER JOIN servants ON servants.id = purchases.servants_id
+INNER JOIN products ON products.id = purchases.products_id
+WHERE servant_name ="Dieter";
+
+-- Kombi Aggregiert / Nicht Aggregiert
+SELECT
+	servant_name AS "Diener",
+    #count(servant_name) AS "Artikelanzahl"
+    sum(product_price) AS "Gesamtkosten"
+FROM purchases
+INNER JOIN servants ON servants.id = purchases.servants_id
+INNER JOIN products ON products.id = purchases.products_id
+GROUP BY servant_name
+HAVING servant_name = "Dieter"
+#WHERE servant_name = "Dieter"
+;
 
 
 
