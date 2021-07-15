@@ -1,0 +1,15 @@
+LOCAL FILE
+Change the back slashes (\) to forward slashes (/) in the file path. Run the file again.
+
+Go to the MySQL Connections page.
+
+Right click the connection and click 'Edit connection'.
+
+Select 'Advanced' option. Paste the below line in the 'Others' box.
+
+ OPT_LOCAL_INFILE=1
+Click 'Test Connection'. It will successfully update the connection.
+
+Click close.
+
+Restart mysql

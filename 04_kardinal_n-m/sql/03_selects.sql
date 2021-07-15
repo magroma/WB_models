@@ -164,3 +164,5 @@ SELECT
 FROM tmp
 ORDER BY Umsatz DESC;
 
+-- Wer bekommt den Lachs?
+-- Ansatz: Produkt --> Diener : cats_id --> cats: Namen
